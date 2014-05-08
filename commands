@@ -125,7 +125,8 @@ case "$1" in
     cat && cat<<EOF
     redis:create <app>                              Create a Redis container
     redis:delete <app>                              Delete specified Redis container
-    redis:info <app>                                Display container informations
+    redis:info <app>                                Display container information
+    redis:ip <app>                                  Display container IP
     redis:link <app> <container>                    Link an app to a Redis container
     redis:logs <app>                                Display last logs from Redis container
 EOF
