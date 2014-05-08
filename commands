@@ -30,7 +30,7 @@ case "$1" in
   redis:create)
 
     # Check if Redis container is installed
-    IMAGE=$(docker images | grep "jezdez/redis" | awk '{print $3}')
+    IMAGE=$(docker images | grep "contech/redis" | awk '{print $3}')
     if [[ -z $IMAGE ]]; then
         echo "Redis image not found... Did you run 'dokku plugins-install' ?"
         exit 1
@@ -52,7 +52,7 @@ case "$1" in
     VOLUME="$HOST_DIR:/opt/redis"
 
     # Launch container
-    docker run -v $VOLUME -name=$CONTAINER_NAME -d jezdez/redis \
+    docker run -v $VOLUME -name=$CONTAINER_NAME -d contech/redis \
         /usr/bin/redis-server /etc/redis/redis.conf
     # Link to a potential existing app
     dokku redis:link $APP $APP
