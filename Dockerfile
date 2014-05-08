@@ -1,15 +1,15 @@
 # Redis Dokku plugin
 #
-# Version 0.1
+# Forked from Version 0.1
 
-FROM ubuntu:quantal
-MAINTAINER Jannis Leidel "jannis@leidel.info"
+FROM ubuntu:trusty
+#MAINTAINER Jannis Leidel "jannis@leidel.info"
+MAINTAINER K Andersen "webmaster@constrainttec.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get -y install software-properties-common && \
-    add-apt-repository ppa:chris-lea/redis-server && \
-    apt-get update && \
+RUN apt-get update && \
+    apt-get -y install software-properties-common && \
     apt-get -y install redis-server
 
 RUN sed -i 's/bind 127.0.0.1/bind 0.0.0.0/' /etc/redis/redis.conf && \

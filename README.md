@@ -7,7 +7,7 @@ Installation
 ------------
 ```
 cd /var/lib/dokku/plugins
-git clone https://github.com/jezdez/dokku-redis-plugin redis
+git clone https://github.com/contech/dokku-redis-plugin redis
 dokku plugins-install
 ```
 
