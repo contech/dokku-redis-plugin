@@ -52,7 +52,7 @@ case "$1" in
     VOLUME="$HOST_DIR:/opt/redis"
 
     # Launch container
-    docker run -v $VOLUME -name=$CONTAINER_NAME -d contech/redis \
+    docker run -v $VOLUME --name=$CONTAINER_NAME -d contech/redis \
         /usr/bin/redis-server /etc/redis/redis.conf
     # Link to a potential existing app
     dokku redis:link $APP $APP
@@ -88,6 +88,12 @@ case "$1" in
     echo "       Host: ${IP}"
     echo "       Private port: 6379"
     echo
+    ;;
+
+  redis:ip)
+    ID=$(docker ps -a | grep "$CONTAINER_NAME" | awk '{print $1}')
+    IP=$(docker inspect $ID | grep IPAddress | cut -d '"' -f 4)
+    echo $IP
     ;;
 
   redis:link)
