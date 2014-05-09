@@ -103,16 +103,16 @@ case "$1" in
             echo "You must specify a container name"
             exit 1
         fi
-        OTHER_CONTAINER_NAME="${PLUGIN_NAME}_$3"
+        LINKTO_CONTAINER_NAME="${PLUGIN_NAME}_$3"
 
         # link this container as "redis"
-        dokku link:create "$APP" "$OTHER_CONTAINER_NAME" "$PLUGIN_NAME"
+        dokku link:create "$APP" "$LINKTO_CONTAINER_NAME" "$PLUGIN_NAME"
 
         # figure out IP to set env var
-        ID=$(docker ps -a | grep "$OTHER_CONTAINER_NAME" | awk '{print $1}')
+        ID=$(docker ps -a | grep "$LINKTO_CONTAINER_NAME" | awk '{print $1}')
         IP=$(docker inspect $ID | grep IPAddress | cut -d '"' -f 4)
         dokku config:set "$APP" $ENVVAR_NAME="redis://\$REDIS_PORT_6379_TCP_ADDR:\$REDIS_PORT_6379_TCP_PORT"
-        echo "-----> $APP linked to $OTHER_CONTAINER_NAME container"
+        echo "-----> $APP linked to $LINKTO_CONTAINER_NAME container"
     fi
     ;;
 
